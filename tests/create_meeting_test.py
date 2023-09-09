@@ -1,8 +1,6 @@
-from src.entities.mentee import Mentee
-from src.entities.mentor import Mentor
-from src.entities.minute import Minute
+from src.entities import Mentor, Mentee, Minute
 from tests.repositories.in_memory_meeting_repository import InMemoryMeetingRepository
-from src.usecases.meeting.createmeeting import CreateMeeting
+from src.usecases.meeting.create_meeting import CreateMeeting
 
 
 def test_create_meeting_in_repository():
