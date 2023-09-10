@@ -7,8 +7,8 @@ from src.entities import Mentor, Mentee, Meeting, Status
 def test_reschedule_meeting():
     history_repository = InMemoryHistoryRepository()
     id = uuid.uuid1()
-    mentor = Mentor('Brenno', 'brenno@nouhau.pro')
-    mentee = Mentee('Talyta', 'talyta@nouhau.pro', 'Nouhau')
+    mentor = Mentor('João', 'Moura', 'joao@email.com')
+    mentee = Mentee('Ana', 'Ribeiro', 'ana@email.com', 'Nouhau')
     date = '2023-09-09 19:01:38.232448'
     duration = 30
     kind = 'ONLINE'
