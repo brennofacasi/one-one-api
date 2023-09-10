@@ -1,1 +1,1 @@
-from src.usecases.minute.create_minute import CreateMinute
+from .create_minute import CreateMinute
