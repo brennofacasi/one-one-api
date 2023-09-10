@@ -1,5 +1,5 @@
 class Meeting:
-    def __init__(self, id, mentor, mentee, date, duration, kind, minute):
+    def __init__(self, id, mentor, mentee, date, duration, kind, minute=None):
         self.id = id
         self.mentor = mentor
         self.mentee = mentee
