@@ -1,4 +1,4 @@
-from src.usecases.ports.meeting_repository import MeetingRepository
+from src.usecases.ports import MeetingRepository
 
 
 class InMemoryMeetingRepository(MeetingRepository):
