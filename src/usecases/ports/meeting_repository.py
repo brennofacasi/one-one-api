@@ -1,9 +1,10 @@
 from abc import ABC, abstractmethod
+from src.entities import Meeting
 
 
 class MeetingRepository(ABC):
     @abstractmethod
-    def add(self, meeting):
+    def add(self, meeting: Meeting):
         raise (NotImplementedError)
 
     @abstractmethod
