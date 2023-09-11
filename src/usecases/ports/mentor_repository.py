@@ -7,7 +7,7 @@ class MentorRepository(ABC):
         raise (NotImplementedError)
 
     @abstractmethod
-    def find_all(self):
+    def get_all(self):
         raise (NotImplementedError)
 
     @abstractmethod
