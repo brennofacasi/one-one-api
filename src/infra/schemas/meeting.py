@@ -4,7 +4,6 @@ from src.entities import Status
 
 
 class MeetingSchema(BaseModel):
-    id: str
     date: datetime
     mentor_id: int
     mentee_id: int
