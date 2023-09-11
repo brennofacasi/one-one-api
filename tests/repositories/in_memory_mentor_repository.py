@@ -13,5 +13,5 @@ class InMemoryMentorRepository(MentorRepository):
             if mentor.email == mentor_email:
                 return mentor
 
-    def find_all(self):
+    def get_all(self):
         return self.mentors
