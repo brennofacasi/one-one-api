@@ -6,7 +6,7 @@ class RescheduleMeeting:
     def __init__(self, history_repository):
         self.history_repository = history_repository
 
-    def perform(self, meeting):
+    def execute(self, meeting):
         repository = self.history_repository
         now = datetime.now()
         history = History(meeting.id, now, Status.RESCHEDULED)

@@ -12,6 +12,6 @@ def test_create_meeting():
     date = '2023-09-09 19:01:38.232448'
     duration = 30
     kind = 'ONLINE'
-    CreateMeeting(meeting_repository).perform(
-        id, mentor, mentee, date, duration, kind)
+    CreateMeeting(meeting_repository).execute(
+        mentor, mentee, date, duration, kind, id)
     assert meeting_repository.find_by_id(id).mentor == mentor
