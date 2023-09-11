@@ -1,6 +1,6 @@
 from datetime import datetime
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, String, DateTime
+from sqlalchemy import Column, String, DateTime, Integer
 from . import Base
 
 
@@ -8,10 +8,10 @@ class Mentor(Base):
     ''' Mentor Database Model '''
     __tablename__ = 'mentor'
 
-    id = Column('id', String, primary_key=True)
+    id = Column('id', Integer, primary_key=True)
     first_name = Column(String, nullable=False)
     last_name = Column(String)
-    email = Column(String)
+    email = Column(String, unique=True)
     created_at = Column(DateTime, default=datetime.now())
     updated_at = Column(DateTime)
 
