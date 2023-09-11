@@ -9,7 +9,7 @@ class Minute(Base):
     __tablename__ = 'minute'
 
     meeting_id = Column(String, ForeignKey('meeting.id'),
-                        unique=True, nullable=False)
+                        primary_key=True, nullable=False)
     content = Column(String, nullable=False)
     created_at = Column(DateTime, default=datetime.now())
     updated_at = Column(DateTime)
