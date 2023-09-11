@@ -7,7 +7,7 @@ from src.infra.repositories import FlaskMeetingRepository
 meeting_blueprint = APIBlueprint('meeting', __name__, url_prefix='/meeting')
 
 meeting_tag = Tag(
-    name='Meetings', description='Adição, visualização e atualização de reuniões.')
+    name='Reuniões', description='Adição, visualização e atualização de reuniões.')
 
 
 @meeting_blueprint.get('/', tags=[meeting_tag], responses={"200": MeetingViewSchema})
