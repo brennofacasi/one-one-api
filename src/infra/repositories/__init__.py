@@ -1,1 +1,2 @@
 from .flask_meeting_repository import FlaskMeetingRepository
+from .flask_mentor_repository import FlaskMentorRepository
