@@ -11,7 +11,7 @@ class History(Base):
 
     meeting_id = Column(String, ForeignKey('meeting.id'), nullable=False)
     status = Column(Enum(Status), nullable=False)
-    created_at = Column(DateTime, default=datetime.now())
+    created_at = Column(DateTime, default=datetime.now(), primary_key=True)
 
     meeting = relationship('Meeting')
 
