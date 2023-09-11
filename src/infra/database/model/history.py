@@ -5,7 +5,7 @@ from . import Base
 from src.entities.status import Status
 
 
-class History(Base):
+class HistoryModel(Base):
     ''' History Database Model '''
     __tablename__ = 'history'
 
@@ -13,7 +13,7 @@ class History(Base):
     status = Column(Enum(Status), nullable=False)
     created_at = Column(DateTime, default=datetime.now(), primary_key=True)
 
-    meeting = relationship('Meeting')
+    meeting = relationship('MeetingModel', back_populates='history')
 
     def __repr__(self) -> str:
         return f'History(id={self.meeting_id!r}, date={self.status!r})'

@@ -4,7 +4,7 @@ from sqlalchemy import Column, DateTime, String, ForeignKey
 from . import Base
 
 
-class Minute(Base):
+class MinuteModel(Base):
     ''' Minute Database Model '''
     __tablename__ = 'minute'
 
@@ -14,7 +14,7 @@ class Minute(Base):
     created_at = Column(DateTime, default=datetime.now())
     updated_at = Column(DateTime)
 
-    meeting = relationship('Meeting')
+    meeting = relationship('MeetingModel', back_populates='minute')
 
     def __repr__(self) -> str:
         return f'Minute(id={self.meeting_id!r}, date={self.content!r})'
