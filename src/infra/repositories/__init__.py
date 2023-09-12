@@ -1,3 +1,3 @@
-from .flask_meeting_repository import FlaskMeetingRepository
-from .flask_mentor_repository import FlaskMentorRepository
+from .db_meeting_repository import DBMeetingRepository
+from .db_mentor_repository import DBMentorRepository
 from .api_mentee_repository import ApiMenteeRepository

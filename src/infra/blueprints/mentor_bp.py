@@ -1,5 +1,5 @@
 from flask_openapi3 import Tag, APIBlueprint
-from src.infra.repositories import FlaskMentorRepository
+from src.infra.repositories import DBMentorRepository
 from src.infra.schemas import MentorSchema
 
 from src.usecases.mentor import CreateMentor
@@ -19,7 +19,7 @@ def get_mentors():
 
 @mentor_blueprint.post('/', tags=[mentor_tag])
 def add_mentor(body: MentorSchema):
-    repository = FlaskMentorRepository()
+    repository = DBMentorRepository()
     try:
         CreateMentor(repository).execute(body)
         return {"message": "Mentor added successfully."}, 200
