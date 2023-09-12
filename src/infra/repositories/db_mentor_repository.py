@@ -3,7 +3,7 @@ from src.infra.database import Session
 from src.infra.database.model import MentorModel
 
 
-class FlaskMentorRepository(MentorRepository):
+class DBMentorRepository(MentorRepository):
     def __init__(self):
         self.session = Session()
 
