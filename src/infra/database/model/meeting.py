@@ -2,6 +2,9 @@ from datetime import datetime
 from typing import Union
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, String,  DateTime, Integer, ForeignKey
+from nanoid import generate
+
+from src.entities import Meeting
 from .base import Base
 
 
@@ -24,12 +27,13 @@ class MeetingModel(Base):
     def __repr__(self) -> str:
         return f'Meeting(id={self.id!r}, date={self.date!r})'
 
-    def __init__(self, date: DateTime, mentor_id: int, mentee_id: int, duration: int, kind: str, updated_at: Union[DateTime, None] = None):
-        self.date = date
-        self.mentor_id = mentor_id
-        self.mentee_id = mentee_id
-        self.duration = duration
-        self.kind = kind
+    def __init__(self, meeting: Meeting, updated_at: Union[DateTime, None] = None):
+        self.date = meeting.date
+        self.mentor_id = meeting.mentor
+        self.mentee_id = meeting.mentee
+        self.duration = meeting.duration
+        self.kind = meeting.kind
+        self.id = generate()
 
         if updated_at:
             self.updated_at = updated_at
