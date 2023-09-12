@@ -1,2 +1,3 @@
 from .flask_meeting_repository import FlaskMeetingRepository
 from .flask_mentor_repository import FlaskMentorRepository
+from .api_mentee_repository import ApiMenteeRepository
