@@ -2,7 +2,7 @@ from flask import jsonify
 from flask_openapi3 import Tag, APIBlueprint
 from src.infra.schemas.meeting import MeetingViewSchema, MeetingSchema
 from src.usecases.meeting import CreateMeeting
-from src.infra.repositories import FlaskMeetingRepository
+from src.infra.repositories import DBMeetingRepository
 
 meeting_blueprint = APIBlueprint('meeting', __name__, url_prefix='/meeting')
 
@@ -18,5 +18,6 @@ def get_meetings():
 
 @meeting_blueprint.post('/', tags=[meeting_tag])
 def add_meeting(body: MeetingSchema):
-    CreateMeeting(FlaskMeetingRepository).execute(body.mentor_id,
-                                                  body.mentee_id, body.date, body.duration, body.kind)
+    repository = DBMeetingRepository()
+    CreateMeeting(repository).execute(body)
+    return {"message": "Meeting added successfully."}, 200
