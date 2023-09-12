@@ -1,8 +1,6 @@
-import uuid
-
 
 class Meeting:
-    def __init__(self, mentor, mentee, date, duration, kind, id=uuid.uuid1()):
+    def __init__(self, mentor, mentee, date, duration, kind, id=None):
         self.id = id
         self.mentor = mentor
         self.mentee = mentee
