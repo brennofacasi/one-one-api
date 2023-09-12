@@ -5,7 +5,8 @@ class CreateMeeting:
     def __init__(self, meeting_repository):
         self.meeting_repository = meeting_repository
 
-    def execute(self, mentor, mentee, date, duration, kind, id):
+    def execute(self, meeting):
         repository = self.meeting_repository
-        meeting = Meeting(mentor, mentee, date, duration, kind, id)
+        meeting = Meeting(meeting.mentor, meeting.mentee,
+                          meeting.date, meeting.duration, meeting.kind)
         repository.add(meeting)
