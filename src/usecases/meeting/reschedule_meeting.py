@@ -9,5 +9,6 @@ class RescheduleMeeting:
     def execute(self, meeting):
         repository = self.history_repository
         now = datetime.now()
-        history = History(meeting.id, now, Status.RESCHEDULED)
+        history = History(meeting.id, now, 'Falta de energia',
+                          Status.RESCHEDULED)
         repository.add(history)
