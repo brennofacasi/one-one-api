@@ -1,10 +1,9 @@
-import uuid
 from tests.repositories.in_memory_history_repository import InMemoryHistoryRepository
 from src.usecases.meeting import RescheduleMeeting
 from src.entities import Mentor, Mentee, Meeting, Status
 
 
-def test_reschedule_meeting():
+def test_reschedule_meeting_in_memory():
     history_repository = InMemoryHistoryRepository()
     mentor = Mentor('João', 'Moura', 'joao@email.com')
     mentee = Mentee('Ana', 'Ribeiro', 'ana@email.com', 'Nouhau')
