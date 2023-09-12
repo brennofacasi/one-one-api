@@ -1,4 +1,5 @@
 from src.entities import Meeting
+from nanoid import generate
 
 
 class CreateMeeting:
@@ -7,6 +8,8 @@ class CreateMeeting:
 
     def execute(self, meeting):
         repository = self.meeting_repository
+        id = generate()
         meeting = Meeting(meeting.mentor, meeting.mentee,
-                          meeting.date, meeting.duration, meeting.kind)
+                          meeting.date, meeting.duration, meeting.kind, id)
         repository.add(meeting)
+        return id
