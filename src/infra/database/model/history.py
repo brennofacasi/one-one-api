@@ -11,6 +11,7 @@ class HistoryModel(Base):
 
     meeting_id = Column(String, ForeignKey('meeting.id'), nullable=False)
     status = Column(Enum(Status), nullable=False)
+    motive = Column(String)
     created_at = Column(DateTime, default=datetime.now(), primary_key=True)
 
     meeting = relationship('MeetingModel', back_populates='history')
