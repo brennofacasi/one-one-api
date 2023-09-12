@@ -1,14 +1,13 @@
 from pydantic import BaseModel
 from datetime import datetime
-from src.entities import Status
 
 
 class MeetingSchema(BaseModel):
     date: datetime
-    mentor_id: int
-    mentee_id: int
+    mentor: int
+    mentee: int
     duration: int
-    kind: Status
+    kind: str
 
 
 class MeetingViewSchema(BaseModel):
