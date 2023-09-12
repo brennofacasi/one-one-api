@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "firstName": "Terry",
+    "lastName": "Medhurst",
+    "email": "atuny0@sohu.com",
+    "company": {
+      "address": {
+        "address": "629 Debbie Drive",
+        "city": "Nashville",
+        "coordinates": {
+          "lat": 36.208114,
+          "lng": -86.58621199999999
+        },
+        "postalCode": "37076",
+        "state": "TN"
+      },
+      "department": "Marketing",
+      "name": "Blanda-O'Keefe",
+      "title": "Help Desk Operator"
+    }
+  },
+  {
+    "id": 2,
+    "firstName": "Sheldon",
+    "lastName": "Quigley",
+    "email": "hbingley1@plala.or.jp",
+    "company": {
+      "address": {
+        "address": "8821 West Myrtle Avenue",
+        "city": "Glendale",
+        "coordinates": {
+          "lat": 33.5404296,
+          "lng": -112.2488391
+        },
+        "postalCode": "85305",
+        "state": "AZ"
+      },
+      "department": "Services",
+      "name": "Aufderhar-Cronin",
+      "title": "Senior Cost Accountant"
+    }
+  },
+  {
+    "id": 3,
+    "firstName": "Terrill",
+    "lastName": "Hills",
+    "email": "rshawe2@51.la",
+    "company": {
+      "address": {
+        "address": "18 Densmore Drive",
+        "city": "Essex",
+        "coordinates": {
+          "lat": 44.492953,
+          "lng": -73.101883
+        },
+        "postalCode": "05452",
+        "state": "VT"
+      },
+      "department": "Marketing",
+      "name": "Lindgren LLC",
+      "title": "Mechanical Systems Engineer"
+    }
+  },
+  {
+    "id": 4,
+    "firstName": "Miles",
+    "lastName": "Cummerata",
+    "email": "yraigatt3@nature.com",
+    "company": {
+      "address": {
+        "address": "210 Green Road",
+        "city": "Manchester",
+        "coordinates": {
+          "lat": 41.7909099,
+          "lng": -72.51195129999999
+        },
+        "postalCode": "06042",
+        "state": "CT"
+      },
+      "department": "Business Development",
+      "name": "Wolff and Sons",
+      "title": "Paralegal"
+    }
+  },
+  {
+    "id": 5,
+    "firstName": "Mavis",
+    "lastName": "Schultz",
+    "email": "kmeus4@upenn.edu",
+    "company": {
+      "address": {
+        "address": "8398 West Denton Lane",
+        "city": "Glendale",
+        "coordinates": {
+          "lat": 33.515353,
+          "lng": -112.240812
+        },
+        "postalCode": "85305",
+        "state": "AZ"
+      },
+      "department": "Support",
+      "name": "Adams Inc",
+      "title": "Web Developer I"
+    }
+  }
+]
