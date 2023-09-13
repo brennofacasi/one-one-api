@@ -1,1 +1,2 @@
 from .duplicate_mentor import DuplicateMentorError
+from .not_found_mentor import NotFoundMentorError
