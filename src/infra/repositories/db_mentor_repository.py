@@ -22,3 +22,9 @@ class DBMentorRepository(MentorRepository):
         mentor = session.query(MentorModel).filter(
             MentorModel.email == email).first()
         return mentor
+
+    def find_by_id(self, id):
+        session = self.session
+        mentor = session.query(MentorModel).filter(
+            MentorModel.id == id).first()
+        return mentor

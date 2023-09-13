@@ -10,3 +10,7 @@ class MeetingRepository(ABC):
     @abstractmethod
     def find_by_id(self, meeting_id):
         raise (NotImplementedError)
+
+    @abstractmethod
+    def get_all(self):
+        raise (NotImplementedError)
