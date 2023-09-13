@@ -1,4 +1,5 @@
 import requests
+from src.infra.schemas import show_mentees
 from src.entities import Mentee
 from src.usecases.ports import MenteeRepository
 
@@ -14,14 +15,18 @@ class ApiMenteeRepository(MenteeRepository):
         result = []
         for user in self.users:
             mentee = Mentee(user['firstName'], user['lastName'],
-                            user['email'], user['company']['name'])
-            result.append(mentee.toJSON(user['id']))
-        return result
+                            user['email'], user['company']['name'], user['id'])
+            result.append(mentee)
+        return show_mentees(result)
 
     def find_by_email(self, email):
-        # TO DO - Implement
-        return super().find_by_email(email)
+        mentees = self.get_all()
+        for mentee in mentees:
+            if mentee['email'] == email:
+                return mentee
 
     def find_by_id(self, id):
-        # TO DO - Implement
-        return super().find_by_id(id)
+        mentees = self.get_all()
+        for mentee in mentees:
+            if mentee['id'] == id:
+                return mentee
