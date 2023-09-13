@@ -1,18 +1,20 @@
 from flask_openapi3 import Tag, APIBlueprint
-from src.usecases.meeting import CreateMeeting, GetMeetings
+
+from src.usecases.meeting import CreateMeeting, GetMeetings, DeleteMeeting
+from src.usecases.meeting.errors import MentorDoesNotExistError, MenteeDoesNotExistError, MeetingNotFoundError
 
 from src.infra.services import Generate
-from src.infra.schemas import MeetingViewSchema, MeetingSchema, ErrorSchema, SuccessSchema, show_meetings
+from src.infra.schemas import MeetingViewSchema, MeetingSchema, ErrorSchema, SuccessSchema, MeetingSearchById, show_meetings
 from src.infra.repositories import DBMeetingRepository, DBMentorRepository, ApiMenteeRepository
-from src.usecases.meeting.errors import MentorDoesNotExistError, MenteeDoesNotExistError
-
-meeting_blueprint = APIBlueprint('meeting', __name__, url_prefix='/meeting')
 
 meeting_tag = Tag(
     name='Reuniões', description='Adição, visualização, atualização e deleção de reuniões.')
 
+meeting_blueprint = APIBlueprint(
+    'meeting', __name__, url_prefix='/meeting', abp_tags=[meeting_tag])
 
-@meeting_blueprint.get('/', tags=[meeting_tag], responses={"200": MeetingViewSchema, "404": ErrorSchema})
+
+@meeting_blueprint.get('/', responses={"200": MeetingViewSchema, "404": ErrorSchema})
 def get_meetings():
     '''
     Mostra todas as reuniões.
@@ -26,7 +28,7 @@ def get_meetings():
     return show_meetings(result, mentee_repository)
 
 
-@meeting_blueprint.post('/', tags=[meeting_tag], responses={"200": SuccessSchema, "400": ErrorSchema})
+@meeting_blueprint.post('/', responses={"200": SuccessSchema, "400": ErrorSchema})
 def add_meeting(body: MeetingSchema):
     '''
     Adiciona reunião ao banco de dados.
@@ -57,3 +59,25 @@ def add_meeting(body: MeetingSchema):
         return {
             "message": "This mentee does not exist."
         }, 400
+
+
+@meeting_blueprint.delete('/<string:id>', responses={"200": SuccessSchema, "400": ErrorSchema})
+def delete_meeting(path: MeetingSearchById):
+    '''
+    Deleta reunião do bando de dados.
+
+    Realiza a deleção da reunião pelo id. Retorna mensagem de sucesso.
+    '''
+    meeting_repository = DBMeetingRepository()
+    try:
+
+        DeleteMeeting(meeting_repository).execute(path.id)
+        return {
+            "id": path.id,
+            "message": "Meeting deleted."
+        }, 200
+
+    except MeetingNotFoundError as e:
+        return {
+            "message": "Meeting not found."
+        }
