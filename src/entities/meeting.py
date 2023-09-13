@@ -1,9 +1,9 @@
 
 class Meeting:
-    def __init__(self, mentor, mentee, date, duration, kind, id=None):
-        self.id = id
-        self.mentor = mentor
-        self.mentee = mentee
+    def __init__(self, mentor_id, mentee_id, date, duration, kind, id=None):
+        self.mentor_id = mentor_id
+        self.mentee_id = mentee_id
         self.date = date
         self.duration = duration
         self.kind = kind
+        self.id = id
