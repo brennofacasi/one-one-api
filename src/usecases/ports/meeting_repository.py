@@ -8,6 +8,10 @@ class MeetingRepository(ABC):
         raise (NotImplementedError)
 
     @abstractmethod
+    def delete(self, meeting_id):
+        raise (NotImplementedError)
+
+    @abstractmethod
     def find_by_id(self, meeting_id):
         raise (NotImplementedError)
 
