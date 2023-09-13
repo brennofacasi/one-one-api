@@ -12,3 +12,6 @@ class InMemoryMeetingRepository(MeetingRepository):
         for meeting in self.meetings:
             if meeting.id == meeting_id:
                 return meeting
+
+    def get_all(self):
+        return self.meetings
