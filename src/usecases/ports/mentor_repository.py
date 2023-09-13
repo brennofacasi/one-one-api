@@ -13,3 +13,7 @@ class MentorRepository(ABC):
     @abstractmethod
     def find_by_email(self, email):
         raise (NotImplementedError)
+
+    @abstractmethod
+    def find_by_id(self, id):
+        raise (NotImplementedError)

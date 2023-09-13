@@ -13,6 +13,14 @@ class DBMeetingRepository(MeetingRepository):
         session.add(meeting_model)
         session.commit()
 
-    def find_by_id(self, meeting_id):
-        # TO DO - Implement Find by Id
-        return super().find_by_id(meeting_id)
+    def find_by_id(self, id):
+        session = self.session
+        meeting = session.query(MeetingModel).filter(
+            MeetingModel.id == id).first()
+        return meeting
+
+    def get_all(self):
+        session = self.session
+        meetings = session.query(MeetingModel).join(
+            MeetingModel.mentor).order_by(MeetingModel.created_at.asc()).all()
+        return meetings
