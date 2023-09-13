@@ -15,3 +15,7 @@ class MentorViewSchema(BaseModel):
     email: str
     created_at: datetime
     updated_at: datetime
+
+
+class MentorSearchById(BaseModel):
+    id: str

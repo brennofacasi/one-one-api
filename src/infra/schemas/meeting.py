@@ -22,6 +22,10 @@ class MeetingViewSchema(BaseModel):
     updated_at: datetime
 
 
+class MeetingSearchById(BaseModel):
+    id: str
+
+
 def show_meetings(meetings: List[MeetingViewSchema], mentee_repository):
     result = []
     for meeting in meetings:
