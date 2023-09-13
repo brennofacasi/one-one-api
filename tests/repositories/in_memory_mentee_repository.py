@@ -22,5 +22,5 @@ class InMemoryMenteeRepository(MenteeRepository):
 
     def find_by_id(self, id):
         for mentee in self.mentees:
-            if mentee.id == id:
+            if mentee['id'] == id:
                 return mentee

@@ -8,6 +8,11 @@ class InMemoryMentorRepository(MentorRepository):
     def add(self, mentor):
         self.mentors.append(mentor)
 
+    def find_by_id(self, id):
+        for mentor in self.mentors:
+            if mentor.id == id:
+                return mentor
+
     def find_by_email(self, mentor_email):
         for mentor in self.mentors:
             if mentor.email == mentor_email:

@@ -8,6 +8,11 @@ class InMemoryMeetingRepository(MeetingRepository):
     def add(self, meeting):
         self.meetings.append(meeting)
 
+    def delete(self, meeting_id):
+        for meeting in self.meetings:
+            if meeting.id == meeting_id:
+                self.meetings.remove(meeting)
+
     def find_by_id(self, meeting_id):
         for meeting in self.meetings:
             if meeting.id == meeting_id:
