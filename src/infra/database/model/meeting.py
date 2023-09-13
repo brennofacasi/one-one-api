@@ -20,19 +20,23 @@ class MeetingModel(Base):
     created_at = Column(DateTime, default=datetime.now())
     updated_at = Column(DateTime)
 
+    mentor = relationship('MentorModel', back_populates='meeting')
     history = relationship('HistoryModel', back_populates='meeting')
     minute = relationship('MinuteModel', back_populates='meeting')
 
     def __repr__(self) -> str:
         return f'Meeting(id={self.id!r}, date={self.date!r})'
 
-    def __init__(self, meeting: Meeting, updated_at: Union[DateTime, None] = None):
+    def __init__(self, meeting: Meeting, created_at: Union[DateTime, None] = None, updated_at: Union[DateTime, None] = None):
         self.date = meeting.date
-        self.mentor_id = meeting.mentor
-        self.mentee_id = meeting.mentee
+        self.mentor_id = meeting.mentor_id
+        self.mentee_id = meeting.mentee_id
         self.duration = meeting.duration
         self.kind = meeting.kind
         self.id = meeting.id
+
+        if created_at:
+            self.created_at = created_at
 
         if updated_at:
             self.updated_at = updated_at
