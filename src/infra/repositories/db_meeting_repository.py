@@ -13,6 +13,12 @@ class DBMeetingRepository(MeetingRepository):
         session.add(meeting_model)
         session.commit()
 
+    def delete(self, meeting_id):
+        session = self.session
+        session.query(MeetingModel).filter(
+            MeetingModel.id == meeting_id).delete()
+        session.commit()
+
     def find_by_id(self, id):
         session = self.session
         meeting = session.query(MeetingModel).filter(
