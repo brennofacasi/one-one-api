@@ -1,23 +1,59 @@
-from flask import jsonify
 from flask_openapi3 import Tag, APIBlueprint
-from src.infra.schemas.meeting import MeetingViewSchema, MeetingSchema
-from src.usecases.meeting import CreateMeeting
-from src.infra.repositories import DBMeetingRepository
+from src.usecases.meeting import CreateMeeting, GetMeetings
+
+from src.infra.services import Generate
+from src.infra.schemas import MeetingViewSchema, MeetingSchema, ErrorSchema, SuccessSchema, show_meetings
+from src.infra.repositories import DBMeetingRepository, DBMentorRepository, ApiMenteeRepository
+from src.usecases.meeting.errors import MentorDoesNotExistError, MenteeDoesNotExistError
 
 meeting_blueprint = APIBlueprint('meeting', __name__, url_prefix='/meeting')
 
 meeting_tag = Tag(
-    name='Reuniões', description='Adição, visualização e atualização de reuniões.')
+    name='Reuniões', description='Adição, visualização, atualização e deleção de reuniões.')
 
 
-@meeting_blueprint.get('/', tags=[meeting_tag], responses={"200": MeetingViewSchema})
+@meeting_blueprint.get('/', tags=[meeting_tag], responses={"200": MeetingViewSchema, "404": ErrorSchema})
 def get_meetings():
-    # TO DO - Implementar
-    return 'Deu certo'
+    '''
+    Mostra todas as reuniões.
+
+    Retorna representação da listagem de todas as reuniões cadastradas no banco de dados.
+    '''
+    meeting_repository = DBMeetingRepository()
+    mentee_repository = ApiMenteeRepository()
+
+    result = GetMeetings(meeting_repository).execute()
+    return show_meetings(result, mentee_repository)
 
 
-@meeting_blueprint.post('/', tags=[meeting_tag])
+@meeting_blueprint.post('/', tags=[meeting_tag], responses={"200": SuccessSchema, "400": ErrorSchema})
 def add_meeting(body: MeetingSchema):
-    repository = DBMeetingRepository()
-    CreateMeeting(repository).execute(body)
-    return {"message": "Meeting added successfully."}, 200
+    '''
+    Adiciona reunião ao banco de dados.
+
+    Retorna mensagem de sucesso com o id.
+    '''
+
+    meeting_repository = DBMeetingRepository()
+    mentor_repository = DBMentorRepository()
+    mentee_repository = ApiMenteeRepository()
+    generator = Generate()
+
+    try:
+
+        id = CreateMeeting(meeting_repository,
+                           mentor_repository, mentee_repository, generator).execute(body)
+        return {
+            "id": id,
+            "message": "Meeting added successfully."
+        }, 200
+
+    except MentorDoesNotExistError as e:
+        return {
+            "message": "This mentor does not exist."
+        }, 400
+
+    except MenteeDoesNotExistError as e:
+        return {
+            "message": "This mentee does not exist."
+        }, 400
