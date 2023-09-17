@@ -9,7 +9,7 @@ class CreateMentor:
     def execute(self, mentor):
         repository = self.mentor_repository
 
-        if repository.find_by_email(mentor.email) != None:
+        if repository.find_by_email(mentor.email) is not None:
             raise DuplicateMentorError()
 
         mentor = Mentor(mentor.first_name, mentor.last_name, mentor.email)
