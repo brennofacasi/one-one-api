@@ -37,4 +37,4 @@ def show_mentors(mentors: List[MentorViewSchema]):
             "created_at": mentor.created_at,
             "updated_at": mentor.updated_at,
         })
-    return result
+    return {"mentors": result}
