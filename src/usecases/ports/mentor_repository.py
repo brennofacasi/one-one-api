@@ -4,16 +4,16 @@ from abc import ABC, abstractmethod
 class MentorRepository(ABC):
     @abstractmethod
     def add(self, mentor):
-        raise (NotImplementedError)
+        raise NotImplementedError
 
     @abstractmethod
     def get_all(self):
-        raise (NotImplementedError)
+        raise NotImplementedError
 
     @abstractmethod
     def find_by_email(self, email):
-        raise (NotImplementedError)
+        raise NotImplementedError
 
     @abstractmethod
     def find_by_id(self, id):
-        raise (NotImplementedError)
+        raise NotImplementedError

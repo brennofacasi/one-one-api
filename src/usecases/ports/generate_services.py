@@ -5,4 +5,4 @@ class GenerateServices(ABC):
 
     @abstractmethod
     def id(self):
-        raise (NotImplementedError)
+        raise NotImplementedError

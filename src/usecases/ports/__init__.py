@@ -4,3 +4,5 @@ from .minute_repository import MinuteRepository
 from .mentor_repository import MentorRepository
 from .mentee_repository import MenteeRepository
 from .generate_services import GenerateServices
+from .slot_repository import SlotRepository
+from .availability_repository import AvailabilityRepository
