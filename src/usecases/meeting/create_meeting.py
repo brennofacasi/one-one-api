@@ -7,12 +7,6 @@ class CreateMeeting:
     """Build a new :class:`CreateMeeting`.
 
     It creates a new meeting in the repository.
-    The class requires two arguments:
-
-    `meeting_repository` The repository class.
-
-    `generator` The generator class, which creates IDs and other utils.
-
     """
 
     def __init__(self,
