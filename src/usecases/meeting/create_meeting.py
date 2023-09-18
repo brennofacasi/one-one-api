@@ -1,45 +1,67 @@
 from src.entities import Meeting
-from src.usecases.ports import MeetingRepository, MentorRepository, MenteeRepository, GenerateServices
-from .errors import MentorDoesNotExistError, MenteeDoesNotExistError
+from src.usecases.ports import MeetingRepository, MentorRepository, MenteeRepository, SlotRepository, GenerateServices
+from .errors import MentorDoesNotExistError, MenteeDoesNotExistError, SlotUnavailable
 
 
 class CreateMeeting:
-    '''Construct a new :class:`CreateMeeting`.
+    """Build a new :class:`CreateMeeting`.
 
-    It is used to create a new meeting in the repository.
+    It creates a new meeting in the repository.
     The class requires two arguments:
 
     `meeting_repository` The repository class.
 
-    `generator` The generator class, used to create ids and other utils.
+    `generator` The generator class, which creates IDs and other utils.
 
-    '''
+    """
 
-    def __init__(self, meeting_repository: MeetingRepository, mentor_repository: MentorRepository, mentee_repository: MenteeRepository, generator: GenerateServices):
+    def __init__(self,
+                 meeting_repository: MeetingRepository,
+                 mentor_repository: MentorRepository,
+                 mentee_repository: MenteeRepository,
+                 slot_repository: SlotRepository,
+                 generator: GenerateServices):
+
         self.meeting_repository = meeting_repository
         self.mentor_repository = mentor_repository
         self.mentee_repository = mentee_repository
+        self.slot_repository = slot_repository
 
         self.generator = generator
-        self.id = generator.id()
+        self.meeting_id = generator.id()
 
     def execute(self, meeting: Meeting):
-        '''
+        """
         It executes the creation of a meeting. It requires the ```meeting``` object.
-        '''
+        """
+
+        # Set repositories
         mentor_repository = self.mentor_repository
         mentee_repository = self.mentee_repository
+        meeting_repository = self.meeting_repository
+        slot_repository = self.slot_repository
 
-        if mentor_repository.find_by_id(meeting.mentor_id) == None:
+        # Check if mentor exists
+        if mentor_repository.find_by_id(meeting.mentor_id) is None:
             raise MentorDoesNotExistError()
 
-        if mentee_repository.find_by_id(meeting.mentee_id) == None:
+        # Check if mentee exists
+        if mentee_repository.find_by_id(meeting.mentee_id) is None:
             raise MenteeDoesNotExistError()
 
-        id = self.id
-        meeting_repository = self.meeting_repository
-        content = Meeting(meeting.mentor_id, meeting.mentee_id,
-                          meeting.date, meeting.duration, meeting.kind, id)
+        # Check if slot is available
+        required_slot = slot_repository.find_by_id(meeting.slot_id)
+        if required_slot.is_available is False:
+            raise SlotUnavailable
 
-        meeting_repository.add(content)
-        return id
+        # Set an id to meeting
+        meeting.set_id(self.meeting_id)
+
+        # Put in database
+        meeting_repository.add(meeting)
+
+        # Make slot unavailable
+        slot_repository.set_unavailable_by_id(meeting.slot_id)
+
+        # Return id
+        return meeting.id
