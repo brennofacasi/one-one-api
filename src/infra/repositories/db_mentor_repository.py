@@ -14,8 +14,9 @@ class DBMentorRepository(MentorRepository):
         session.commit()
 
     def get_all(self):
-        # TO DO - Implement
-        return super().get_all()
+        session = self.session
+        mentors = session.query(MentorModel).all()
+        return mentors
 
     def find_by_email(self, email):
         session = self.session
@@ -23,8 +24,8 @@ class DBMentorRepository(MentorRepository):
             MentorModel.email == email).first()
         return mentor
 
-    def find_by_id(self, id):
+    def find_by_id(self, mentor_id):
         session = self.session
         mentor = session.query(MentorModel).filter(
-            MentorModel.id == id).first()
+            MentorModel.id == mentor_id).first()
         return mentor
