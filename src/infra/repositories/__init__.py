@@ -1,3 +1,4 @@
 from .db_meeting_repository import DBMeetingRepository
 from .db_mentor_repository import DBMentorRepository
+from .db_slot_repository import DBSlotRepository
 from .api_mentee_repository import ApiMenteeRepository
