@@ -8,7 +8,7 @@ class DeleteMeeting:
 
     def execute(self, meeting_id):
         repository = self.meeting_repository
-        if repository.find_by_id(meeting_id) == None:
-            raise MeetingNotFoundError()
+        if repository.find_by_id(meeting_id) is None:
+            raise MeetingNotFoundError
 
         repository.delete(meeting_id)
