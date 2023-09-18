@@ -1,6 +1,6 @@
 from src.usecases.ports import MeetingRepository
 from src.infra.database import Session
-from src.infra.database.model import MeetingModel
+from src.infra.database.model import MeetingModel, SlotModel
 
 
 class DBMeetingRepository(MeetingRepository):
@@ -13,20 +13,24 @@ class DBMeetingRepository(MeetingRepository):
         session.add(meeting_model)
         session.commit()
 
+    def update(self, meeting_id, data):
+        # TO DO: Implement update method
+        raise NotImplementedError
+
     def delete(self, meeting_id):
         session = self.session
         session.query(MeetingModel).filter(
             MeetingModel.id == meeting_id).delete()
         session.commit()
 
-    def find_by_id(self, id):
+    def find_by_id(self, meeting_id):
         session = self.session
         meeting = session.query(MeetingModel).filter(
-            MeetingModel.id == id).first()
+            MeetingModel.id == meeting_id).first()
         return meeting
 
     def get_all(self):
         session = self.session
         meetings = session.query(MeetingModel).join(
-            MeetingModel.mentor).order_by(MeetingModel.created_at.asc()).all()
+            MeetingModel.mentor).join(MeetingModel.slot).order_by(MeetingModel.created_at.asc()).all()
         return meetings
