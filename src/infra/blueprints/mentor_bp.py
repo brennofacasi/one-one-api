@@ -1,4 +1,5 @@
 from flask_openapi3 import Tag, APIBlueprint
+from src.entities import Mentor
 
 from src.infra.repositories import DBMentorRepository
 from src.infra.schemas import ErrorSchema, SuccessSchema
@@ -43,7 +44,8 @@ def add_mentor(body: MentorSchema):
     """
     repository = DBMentorRepository()
     try:
-        CreateMentor(repository).execute(body)
+        mentor = Mentor(body.first_name, body.last_name, body.email)
+        CreateMentor(repository).execute(mentor)
         return {"message": "Mentor added successfully."}, 200
 
     except DuplicateMentorError as e:

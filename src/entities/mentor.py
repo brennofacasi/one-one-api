@@ -4,6 +4,3 @@ class Mentor:
         self.last_name = last_name
         self.email = email
         self.id = id
-
-    def set_id(self, id):
-        self.id = id

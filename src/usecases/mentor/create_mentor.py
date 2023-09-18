@@ -1,4 +1,3 @@
-from src.entities import Mentor
 from .errors import DuplicateMentorError
 
 
@@ -12,5 +11,4 @@ class CreateMentor:
         if repository.find_by_email(mentor.email) is not None:
             raise DuplicateMentorError()
 
-        mentor = Mentor(mentor.first_name, mentor.last_name, mentor.email)
         repository.add(mentor)
