@@ -3,11 +3,11 @@ from typing import List
 
 
 class MenteeViewSchema(BaseModel):
-    id: int
-    first_name: str
-    last_name: str
-    email: str
-    company: str
+    id: int = 2
+    first_name: str = "Mike"
+    last_name: str = "Wazowski"
+    email: str = "mike@monstersinc.com"
+    company: str = "Monsters Inc."
 
 
 def show_mentees(mentees: List[MenteeViewSchema]):
