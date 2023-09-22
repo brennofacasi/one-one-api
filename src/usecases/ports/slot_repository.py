@@ -7,17 +7,13 @@ class SlotRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
+    def delete(self, slot_id):
+        raise NotImplementedError
+
+    @abstractmethod
     def find_by_id(self, slot_id):
         raise NotImplementedError
 
     @abstractmethod
     def find_by_mentor_id(self, mentor_id):
-        raise NotImplementedError
-
-    @abstractmethod
-    def set_available_by_id(self, slot_id):
-        raise NotImplementedError
-
-    @abstractmethod
-    def set_unavailable_by_id(self, slot_id):
         raise NotImplementedError
