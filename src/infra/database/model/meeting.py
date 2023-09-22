@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Union
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, String,  DateTime, Integer, ForeignKey
@@ -14,10 +14,10 @@ class MeetingModel(Base):
     id = Column("id", String, primary_key=True)
     mentor_id = Column(Integer, ForeignKey("mentor.id"), nullable=False)
     mentee_id = Column(Integer, nullable=False)
-    slot_id = Column(Integer, ForeignKey("slot.id"))
+    slot_id = Column(String, ForeignKey("slot.id"))
     kind = Column(String, nullable=False)
 
-    created_at = Column(DateTime, default=datetime.now())
+    created_at = Column(DateTime, default=datetime.now(timezone.utc))
     updated_at = Column(DateTime)
 
     mentor = relationship("MentorModel", foreign_keys=[mentor_id])
@@ -26,13 +26,13 @@ class MeetingModel(Base):
     history = relationship("HistoryModel", back_populates="meeting")
     minute = relationship("MinuteModel", back_populates="meeting")
 
-    def __init__(self, meeting: Meeting, created_at: Union[DateTime, None] = None,
+    def __init__(self, meeting: Meeting, slot_id: int, created_at: Union[DateTime, None] = None,
                  updated_at: Union[DateTime, None] = None):
         self.mentor_id = meeting.mentor_id
         self.mentee_id = meeting.mentee_id
-        self.slot_id = meeting.slot_id
         self.kind = meeting.kind
         self.id = meeting.id
+        self.slot_id = slot_id
 
         if created_at:
             self.created_at = created_at
