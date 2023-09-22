@@ -1,10 +1,11 @@
-from src.entities import Meeting
-from src.usecases.ports import MeetingRepository, MentorRepository, MenteeRepository, SlotRepository, GenerateServices
-from .errors import MentorDoesNotExistError, MenteeDoesNotExistError, SlotUnavailable
+from src.entities import Meeting, Slot
+from src.usecases.ports import *
+from .errors import *
 
 
 class CreateMeeting:
-    """Build a new :class:`CreateMeeting`.
+    """
+    Build a new :class:`CreateMeeting`.
 
     It creates a new meeting in the repository.
     """
@@ -22,7 +23,11 @@ class CreateMeeting:
         self.slot_repository = slot_repository
 
         self.generator = generator
-        self.meeting_id = generator.id()
+
+    def __periods_overlap(self, period1, period2):
+        start1, end1 = period1
+        start2, end2 = period2
+        return end1 >= start2 and end2 >= start1
 
     def execute(self, meeting: Meeting):
         """
@@ -35,6 +40,8 @@ class CreateMeeting:
         meeting_repository = self.meeting_repository
         slot_repository = self.slot_repository
 
+        required_slot = (meeting.slot.start_time, meeting.slot.end_time)
+
         # Check if mentor exists
         if mentor_repository.find_by_id(meeting.mentor_id) is None:
             raise MentorDoesNotExistError()
@@ -44,18 +51,23 @@ class CreateMeeting:
             raise MenteeDoesNotExistError()
 
         # Check if slot is available
-        required_slot = slot_repository.find_by_id(meeting.slot_id)
-        if required_slot.is_available is False:
-            raise SlotUnavailable
+        mentor_slots = slot_repository.find_by_mentor_id(meeting.mentor_id)
 
-        # Set an id to meeting
-        meeting.set_id(self.meeting_id)
+        for mentor_slot in mentor_slots:
+            unavailable_slot = (mentor_slot.start_time, mentor_slot.end_time)
+            if self.__periods_overlap(required_slot, unavailable_slot):
+                raise SlotUnavailable
+
+        # Set ids
+        meeting_id = self.generator.id()
+        slot_id = self.generator.id()
+
+        meeting.slot.id = slot_id
+        meeting.id = meeting_id
 
         # Put in database
         meeting_repository.add(meeting)
-
-        # Make slot unavailable
-        slot_repository.set_unavailable_by_id(meeting.slot_id)
+        slot_repository.add(meeting.slot)
 
         # Return id
         return meeting.id
