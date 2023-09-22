@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, DateTime, String, ForeignKey
 from . import Base
@@ -11,7 +11,7 @@ class MinuteModel(Base):
     meeting_id = Column(String, ForeignKey("meeting.id"),
                         primary_key=True, nullable=False)
     content = Column(String, nullable=False)
-    created_at = Column(DateTime, default=datetime.now())
+    created_at = Column(DateTime, default=datetime.now(timezone.utc))
     updated_at = Column(DateTime)
 
     meeting = relationship("MeetingModel", foreign_keys=[meeting_id])

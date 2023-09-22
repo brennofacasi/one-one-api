@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Union
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, String, DateTime, Integer
@@ -15,7 +15,7 @@ class MentorModel(Base):
     first_name = Column(String, nullable=False)
     last_name = Column(String)
     email = Column(String, unique=True)
-    created_at = Column(DateTime, default=datetime.now())
+    created_at = Column(DateTime, default=datetime.now(timezone.utc))
     updated_at = Column(DateTime)
 
     meeting = relationship("MeetingModel", back_populates="mentor")
