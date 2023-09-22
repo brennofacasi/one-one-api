@@ -13,6 +13,12 @@ class DBSlotRepository(SlotRepository):
         session.add(slot_model)
         session.commit()
 
+    def delete(self, slod_it):
+        session = self.session
+        session.query(SlotModel).filter(
+            SlotModel.id == slod_it).delete()
+        session.commit()
+
     def find_by_id(self, slot_id):
         session = self.session
         slot = session.query(SlotModel).filter(
@@ -24,15 +30,3 @@ class DBSlotRepository(SlotRepository):
         slots = session.query(SlotModel).filter(
             SlotModel.mentor_id == mentor_id).all()
         return slots
-
-    def set_available_by_id(self, slot_id):
-        session = self.session
-        session.query(SlotModel).filter(SlotModel.id ==
-                                        slot_id).update({"is_available": True})
-        session.commit()
-
-    def set_unavailable_by_id(self, slot_id):
-        session = self.session
-        session.query(SlotModel).filter(SlotModel.id ==
-                                        slot_id).update({"is_available": False})
-        session.commit()
