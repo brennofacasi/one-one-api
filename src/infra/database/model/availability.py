@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Union
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, DateTime, Time, Integer, ForeignKey
@@ -16,7 +16,7 @@ class AvailabilityModel(Base):
     week_day = Column(Integer, nullable=False)
     from_time = Column(Time, nullable=False)
     to_time = Column(Time, nullable=False)
-    created_at = Column(DateTime, default=datetime.now())
+    created_at = Column(DateTime, default=datetime.now(timezone.utc))
     updated_at = Column(DateTime)
 
     mentor = relationship(
