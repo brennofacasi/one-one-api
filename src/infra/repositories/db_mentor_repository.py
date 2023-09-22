@@ -13,6 +13,12 @@ class DBMentorRepository(MentorRepository):
         session.add(mentor_model)
         session.commit()
 
+    def delete(self, mentor_id):
+        session = self.session
+        session.query(MentorModel).filter(
+            MentorModel.id == mentor_id).delete()
+        session.commit()
+
     def get_all(self):
         session = self.session
         mentors = session.query(MentorModel).all()
