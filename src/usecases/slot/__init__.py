@@ -1,1 +1,1 @@
-from .create_slot import CreateSlot
+from .delete_slot import DeleteSlot
