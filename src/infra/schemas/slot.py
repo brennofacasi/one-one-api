@@ -10,4 +10,4 @@ class SlotSchema(BaseModel):
 
 
 class SlotSearchById(BaseModel):
-    id: int
+    id: str
