@@ -7,6 +7,10 @@ class MentorRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
+    def delete(self, mentor_id):
+        raise NotImplementedError
+
+    @abstractmethod
     def get_all(self):
         raise NotImplementedError
 
