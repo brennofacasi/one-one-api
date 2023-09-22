@@ -1,4 +1,3 @@
-from typing import List
 from datetime import datetime
 from pydantic import BaseModel
 
@@ -23,10 +22,17 @@ class MentorSearchById(BaseModel):
 
 
 class MentorListSchema(BaseModel):
-    mentors: List[MentorViewSchema]
+    mentors: list[MentorViewSchema]
 
 
-def show_mentors(mentors: List[MentorViewSchema]):
+class MentorGetAvailableSlotsSchema(BaseModel):
+    mentor_id: str = 1
+    week_starts: datetime = "2023-09-21T12:00:00Z"
+    week_ends: datetime = "2023-09-28T18:00:00Z"
+    slot_duration: int = 30
+
+
+def show_mentors(mentors: list[MentorViewSchema]):
     result = []
     for mentor in mentors:
         result.append({
@@ -38,3 +44,13 @@ def show_mentors(mentors: List[MentorViewSchema]):
             "updated_at": mentor.updated_at,
         })
     return {"mentors": result}
+
+
+def show_mentor_slots(slots: list[tuple[datetime.time]]):
+    result = []
+    for slot in slots:
+        result.append({
+            "start_time": slot[0],
+            "end_time": slot[1]
+        })
+    return {"slots": result}
