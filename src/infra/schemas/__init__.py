@@ -4,3 +4,4 @@ from .mentee import *
 from .error import *
 from .success import *
 from .slot import *
+from .availability import *
