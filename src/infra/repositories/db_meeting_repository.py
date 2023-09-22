@@ -9,7 +9,7 @@ class DBMeetingRepository(MeetingRepository):
 
     def add(self, meeting):
         session = self.session
-        meeting_model = MeetingModel(meeting)
+        meeting_model = MeetingModel(meeting, meeting.slot.id)
         session.add(meeting_model)
         session.commit()
 
