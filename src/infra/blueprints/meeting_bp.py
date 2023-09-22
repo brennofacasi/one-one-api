@@ -1,5 +1,5 @@
 from flask_openapi3 import Tag, APIBlueprint
-from src.entities.meeting import Meeting
+from src.entities import Meeting, Slot
 from src.infra.services import Generate
 from src.infra.schemas import ErrorSchema, SuccessSchema
 
@@ -44,8 +44,10 @@ def add_meeting(body: MeetingSchema):
     generator = Generate()
 
     try:
+        slot = Slot(body.mentor_id, body.slot.start_time, body.slot.end_time)
         meeting = Meeting(body.mentor_id, body.mentee_id,
-                          body.slot_id, body.kind)
+                          slot, body.kind)
+
         meeting_id = CreateMeeting(meeting_repository, mentor_repository,
                                    mentee_repository, slot_repository, generator).execute(meeting)
         return {
