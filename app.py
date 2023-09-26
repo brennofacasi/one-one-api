@@ -13,6 +13,8 @@ info = Info(title=title, description=description, version=version)
 app = OpenAPI(__name__, info=info)
 
 CORS(app)
+app.config['CORS_ALLOW_HEADERS'] = 'Content-Type'
+
 
 # Tags
 home_tag = Tag(name="Home", description="Rota para Swagger.")
