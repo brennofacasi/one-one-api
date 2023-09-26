@@ -9,7 +9,8 @@ class DBMeetingRepository(MeetingRepository):
 
     def add(self, meeting):
         session = self.session
-        meeting_model = MeetingModel(meeting, meeting.slot.id)
+        meeting_model = MeetingModel(meeting)
+        meeting_model.slot = SlotModel(meeting.slot)
         session.add(meeting_model)
         session.commit()
 
@@ -32,5 +33,5 @@ class DBMeetingRepository(MeetingRepository):
     def get_all(self):
         session = self.session
         meetings = session.query(MeetingModel).join(
-            MeetingModel.mentor).join(MeetingModel.slot).order_by(MeetingModel.created_at.asc()).all()
+            MeetingModel.mentor).join(MeetingModel.slot).order_by(SlotModel.start_time.asc()).all()
         return meetings
