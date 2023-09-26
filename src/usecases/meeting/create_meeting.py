@@ -60,14 +60,10 @@ class CreateMeeting:
 
         # Set ids
         meeting_id = self.generator.id()
-        slot_id = self.generator.id()
-
-        meeting.slot.id = slot_id
         meeting.id = meeting_id
 
         # Put in database
         meeting_repository.add(meeting)
-        slot_repository.add(meeting.slot)
 
         # Return id
         return meeting.id
