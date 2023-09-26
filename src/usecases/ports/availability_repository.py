@@ -11,7 +11,15 @@ class AvailabilityRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
+    def get_all(self):
+        raise NotImplementedError
+
+    @abstractmethod
     def find_by_id(self, availability_id):
+        raise NotImplementedError
+
+    @abstractmethod
+    def delete(self, availability_id):
         raise NotImplementedError
 
     @abstractmethod
