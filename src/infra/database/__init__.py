@@ -12,7 +12,7 @@ if not os.path.exists(db_path):
 
 db_url = 'sqlite:///%s/db.sqlite3' % db_path
 
-engine = create_engine(db_url, echo=False)
+engine = create_engine(db_url, echo=False, pool_size=20, max_overflow=0)
 Session = sessionmaker(bind=engine)
 
 if not database_exists(engine.url):
