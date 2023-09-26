@@ -19,10 +19,8 @@ class MentorModel(Base):
     updated_at = Column(DateTime)
 
     meeting = relationship("MeetingModel", back_populates="mentor")
+    slot = relationship("SlotModel", back_populates="mentor")
     availability = relationship("AvailabilityModel", back_populates="mentor")
-
-    def __repr__(self) -> str:
-        return f"Mentor(id={self.id!r}, name={self.first_name!r}, email={self.email!r})"
 
     def __init__(self, mentor: Mentor, updated_at: Union[DateTime, None] = None):
         self.id = mentor.id
