@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from typing import Union
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, DateTime, Time, Integer, ForeignKey
+from sqlalchemy import Column, DateTime, Time, Integer, ForeignKey, UniqueConstraint
 
 from . import Base
 from src.entities import Availability
@@ -21,6 +21,9 @@ class AvailabilityModel(Base):
 
     mentor = relationship(
         "MentorModel", back_populates="availability", foreign_keys=[mentor_id])
+
+    __table_args__ = (UniqueConstraint(
+        "mentor_id", "from_time", "to_time", "week_day"),)
 
     def __init__(self, availability: Availability,
                  created_at: Union[DateTime, None] = None, updated_at: Union[DateTime, None] = None):
