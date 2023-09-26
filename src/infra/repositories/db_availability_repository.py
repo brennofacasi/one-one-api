@@ -1,4 +1,3 @@
-from src.entities import Availability
 from src.usecases.ports import AvailabilityRepository
 from src.infra.database.model import AvailabilityModel
 from src.infra.database import Session
@@ -24,18 +23,25 @@ class DBAvailabilityRepository(AvailabilityRepository):
         session.add_all(availabilities_model)
         session.commit()
 
+    def get_all(self):
+        session = self.session
+        availabilities = session.query(AvailabilityModel).all()
+        return availabilities
+
     def find_by_id(self, availability_id):
         session = self.session
         availability = session.query(AvailabilityModel).filter(
             AvailabilityModel.id == availability_id).first()
         return availability
 
+    def delete(self, availability_id):
+        session = self.session
+        session.query(AvailabilityModel).filter(
+            AvailabilityModel.id == availability_id).delete()
+        session.commit()
+
     def find_by_mentor_id(self, mentor_id):
         session = self.session
-        availabilities = []
-        result = session.query(AvailabilityModel).filter(
-            AvailabilityModel.mentor_id == mentor_id).all()
-        for item in result:
-            availabilities.append(Availability(
-                item.mentor_id, item.week_day, item.from_time, item.to_time, item.id))
+        availabilities = session.query(AvailabilityModel).filter(
+            AvailabilityModel.mentor_id == mentor_id).order_by(AvailabilityModel.week_day.asc()).all()
         return availabilities
