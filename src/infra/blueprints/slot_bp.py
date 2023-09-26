@@ -14,6 +14,11 @@ slot_blueprint = APIBlueprint(
 
 @slot_blueprint.delete("/<string:id>", responses={"200": SuccessSchema, "400": ErrorSchema})
 def delete_slot(path: SlotSearchById):
+    """
+    Deleta slot de horário do banco de dados.
+
+    Remove o slot através do ID e o deixa disponível para outras marcações de mentoria.
+    """
     slot_repository = DBSlotRepository()
 
     try:
