@@ -10,7 +10,7 @@ from src.usecases.mentor.errors import DuplicateMentorError
 
 
 mentor_tag = Tag(
-    name="Mentores", description="Adição, visualização e atualização de mentores.")
+    name="Mentores", description="Adição, visualização e deleção de mentores.")
 
 mentor_blueprint = APIBlueprint(
     "mentor", __name__, url_prefix="/mentor", abp_tags=[mentor_tag])
@@ -56,6 +56,11 @@ def add_mentor(body: MentorSchema):
 
 @mentor_blueprint.delete("/<string:id>", responses={"200": SuccessSchema, "400": ErrorSchema})
 def delete_mentor(path: MentorSearchById):
+    """
+    Deleta mentor do banco de dados.
+
+    Realiza a deleção do mentor pelo ID. Retorna mensagem de sucesso.
+    """
     repository = DBMentorRepository()
     try:
         DeleteMentor(repository).execute(path.id)
@@ -67,10 +72,15 @@ def delete_mentor(path: MentorSearchById):
 
 @mentor_blueprint.get("/slots")
 def get_mentor_available_slots(query: MentorGetAvailableSlotsSchema):
+    """
+    Gera slots disponíveis do mentor.
+
+    Retorna todos os intervalos de tempo disponíveis em um período de tempo, de acordo com a disponibilidade registrada do mentor, para marcação de reuniões de mentoria.
+    """
     availability_repository = DBAvailabilityRepository()
     slot_repository = DBSlotRepository()
 
     result = GetMentorAvailableSlots(availability_repository, slot_repository).execute(query.mentor_id, query.week_starts,
                                                                                        query.week_ends, query.slot_duration)
-    print(result)
+
     return show_mentor_slots(result)
