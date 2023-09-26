@@ -77,9 +77,9 @@ def delete_meeting(path: MeetingSearchById):
     Realiza a deleção da reunião pelo id. Retorna mensagem de sucesso.
     """
     meeting_repository = DBMeetingRepository()
+    slot_repository = DBSlotRepository()
     try:
-
-        DeleteMeeting(meeting_repository).execute(path.id)
+        DeleteMeeting(meeting_repository, slot_repository).execute(path.id)
         return {
             "id": path.id,
             "message": "Meeting deleted."
