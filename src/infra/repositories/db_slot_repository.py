@@ -30,3 +30,9 @@ class DBSlotRepository(SlotRepository):
         slots = session.query(SlotModel).filter(
             SlotModel.mentor_id == mentor_id).all()
         return slots
+
+    def find_by_meeting_id(self, meeting_id):
+        session = self.session
+        slots = session.query(SlotModel).filter(
+            SlotModel.meeting_id == meeting_id).all()
+        return slots
