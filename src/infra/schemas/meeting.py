@@ -43,8 +43,8 @@ def show_meetings(meetings: list[MeetingViewSchema], mentee_repository):
             },
             "mentee": mentee,
             "slot": {
-                "start_time": meeting.slot.start_time,
-                "end_time": meeting.slot.end_time,
+                "start_time": meeting.slot.start_time if meeting.slot else None,
+                "end_time": meeting.slot.end_time if meeting.slot else None,
             },
             "kind": meeting.kind,
             "created_at": meeting.created_at,
