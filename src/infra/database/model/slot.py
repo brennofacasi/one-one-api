@@ -11,8 +11,9 @@ class SlotModel(Base):
     """ Slot Database Model """
     __tablename__ = "slot"
 
-    id = Column("id", String, primary_key=True)
+    id = Column("id", Integer, primary_key=True)
     mentor_id = Column(Integer, ForeignKey("mentor.id"), nullable=False)
+    meeting_id = Column(String, ForeignKey("meeting.id"))
     start_time = Column(DateTime, nullable=False)
     end_time = Column(DateTime, nullable=False)
 
@@ -20,9 +21,9 @@ class SlotModel(Base):
     updated_at = Column(DateTime)
 
     mentor = relationship("MentorModel", foreign_keys=[
-                          mentor_id])
-
-    meeting = relationship("MeetingModel", back_populates="slot")
+                          mentor_id], back_populates="slot")
+    meeting = relationship("MeetingModel", foreign_keys=[
+                           meeting_id], back_populates="slot")
 
     __table_args__ = (UniqueConstraint('mentor_id', 'start_time', 'end_time'),)
 
@@ -30,6 +31,7 @@ class SlotModel(Base):
                  updated_at: Union[DateTime, None] = None):
 
         self.mentor_id = slot.mentor_id
+        self.meeting_id = slot.meeting_id
         self.start_time = slot.start_time
         self.end_time = slot.end_time
         self.id = slot.id
