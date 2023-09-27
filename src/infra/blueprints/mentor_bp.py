@@ -54,6 +54,21 @@ def add_mentor(body: MentorSchema):
         return {"message": str(e)}, 400
 
 
+@mentor_blueprint.patch("/", responses={"200": SuccessSchema, "400": ErrorSchema})
+def update_mentor(body: MentorEditSchema):
+    """
+    Atualiza mentor no banco de dados.
+
+    O ID é obrigatório. Retorna mensagem de sucesso.
+    """
+    try:
+        repository = DBMentorRepository()
+        EditMentor(repository).execute(body)
+        return {"message": "Mentor updated"}, 200
+    except Exception as e:
+        return {"message": str(e)}, 400
+
+
 @mentor_blueprint.delete("/<string:id>", responses={"200": SuccessSchema, "400": ErrorSchema})
 def delete_mentor(path: MentorSearchById):
     """
