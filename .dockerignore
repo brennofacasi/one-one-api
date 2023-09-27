@@ -1,4 +1,7 @@
+Dockerfile
+.dockerignore
 database
 env
-.env
+.env.example
 README.md
+.git
