@@ -25,6 +25,14 @@ class MentorListSchema(BaseModel):
     mentors: list[MentorViewSchema]
 
 
+class MentorEditSchema(BaseModel):
+    id: int
+    first_name: str | None
+    last_name: str | None
+    email: str | None
+    updated_at: datetime | None = None
+
+
 class MentorGetAvailableSlotsSchema(BaseModel):
     mentor_id: str = 1
     week_starts: datetime = "2023-09-21T12:00:00Z"
