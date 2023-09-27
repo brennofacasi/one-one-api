@@ -1,9 +1,11 @@
 # One:One API 💬
 
-A API **One:One** nasceu como uma plataforma de agendamentos de mentorias entre colaboradores e psicólogos, para que pudessem encaminhar metas em reuniões one-on-one.
+A API **One:One** nasceu como uma plataforma de agendamentos de mentorias entre colaboradores e psicólogos, para que juntos possam encaminhar metas em reuniões one-on-one.
 
 
-Para esse projeto de MVP, foi desenvolvido serviços para a área do(a) gestor(a) do contrato de mentorias, possibilidando que ele(a) possa cadastrar mentores e suas disponibilidades, designar mentorandos e decidir o formato das reuniões.
+Para esse projeto de MVP da Sprint 3 do curso de Pós-graduação em Desenvolvimento Full Stack da PUC-Rio, foi desenvolvido serviços para a área do(a) gestor(a) do contrato de mentorias, possibilidando que ele(a) possa cadastrar mentores e suas disponibilidades, designar mentorandos e decidir o formato das reuniões.
+
+👀 **Não esqueça de baixar e rodar a aplicação web**! Acesse o [One:One App](https://github.com/brennofacasi/one-one-app).
 
 ## Primeiros passos 🚀
 
