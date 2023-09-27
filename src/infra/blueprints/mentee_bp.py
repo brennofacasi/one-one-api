@@ -6,7 +6,7 @@ from src.usecases.mentees import GetMentees
 mentee_blueprint = APIBlueprint("mentee", __name__, url_prefix="/mentee")
 
 mentee_tag = Tag(name="Mentodaros",
-                 description="Adição, visualização e atualização de usuários mentorados.")
+                 description="Visualização de usuários mentorados.")
 
 
 @mentee_blueprint.get("/", tags=[mentee_tag], responses={"200": MenteeViewSchema})

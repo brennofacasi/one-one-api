@@ -10,7 +10,7 @@ from src.usecases.mentor.errors import DuplicateMentorError
 
 
 mentor_tag = Tag(
-    name="Mentores", description="Adição, visualização e deleção de mentores.")
+    name="Mentores", description="Adição, visualização, atualização e deleção de mentores.")
 
 mentor_blueprint = APIBlueprint(
     "mentor", __name__, url_prefix="/mentor", abp_tags=[mentor_tag])

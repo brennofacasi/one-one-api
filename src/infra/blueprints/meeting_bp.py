@@ -9,7 +9,7 @@ from src.infra.schemas.meeting import *
 from src.infra.repositories import *
 
 meeting_tag = Tag(
-    name="Reuniões", description="Adição, visualização, atualização e deleção de reuniões.")
+    name="Reuniões", description="Adição, visualização e deleção de reuniões.")
 
 meeting_blueprint = APIBlueprint(
     "meeting", __name__, url_prefix="/meeting", abp_tags=[meeting_tag])
@@ -32,7 +32,7 @@ def get_meetings():
 @meeting_blueprint.post("/", responses={"200": SuccessSchema, "400": ErrorSchema})
 def add_meeting(body: MeetingSchema):
     """
-    Adiciona reunião ao banco de dados.
+    Adiciona reunião (com slot de horário) ao banco de dados.
 
     Retorna mensagem de sucesso com o id.
     """
@@ -72,7 +72,7 @@ def add_meeting(body: MeetingSchema):
 @meeting_blueprint.delete("/<string:id>", responses={"200": SuccessSchema, "400": ErrorSchema})
 def delete_meeting(path: MeetingSearchById):
     """
-    Deleta reunião do bando de dados.
+    Deleta reunião do banco de dados.
 
     Realiza a deleção da reunião pelo id. Retorna mensagem de sucesso.
     """

@@ -6,7 +6,7 @@ from src.usecases.slot import DeleteSlot
 
 
 slot_tag = Tag(
-    name="Horários", description="Adição, visualização, atualização de horários.")
+    name="Horários", description="Deleção de horários.")
 
 slot_blueprint = APIBlueprint(
     "slot", __name__, url_prefix="/slot", abp_tags=[slot_tag])
