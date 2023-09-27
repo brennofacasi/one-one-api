@@ -15,6 +15,3 @@ class MinuteModel(Base):
     updated_at = Column(DateTime)
 
     meeting = relationship("MeetingModel", foreign_keys=[meeting_id])
-
-    def __repr__(self) -> str:
-        return f"Minute(id={self.meeting_id!r}, date={self.content!r})"

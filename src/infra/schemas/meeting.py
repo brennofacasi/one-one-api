@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
+from typing import List
 
 __all__ = ['MeetingSchema', 'MeetingViewSchema',
            'MeetingSearchById', 'show_meetings']
@@ -31,7 +32,7 @@ class MeetingSearchById(BaseModel):
     id: str
 
 
-def show_meetings(meetings: list[MeetingViewSchema], mentee_repository):
+def show_meetings(meetings: List[MeetingViewSchema], mentee_repository):
     result = []
     for meeting in meetings:
         mentee = mentee_repository.find_by_id(meeting.mentee_id)

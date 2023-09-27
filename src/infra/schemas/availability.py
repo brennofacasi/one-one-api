@@ -1,6 +1,6 @@
-from datetime import datetime, timedelta, time
+from datetime import datetime, time
 from pydantic import BaseModel
-from datetime import time
+from typing import List, Optional
 
 
 class AvailabilitySchema(BaseModel):
@@ -11,7 +11,7 @@ class AvailabilitySchema(BaseModel):
 
 
 class AvailabilityCreateSchema(BaseModel):
-    availabilities: list[AvailabilitySchema]
+    availabilities: List[AvailabilitySchema]
 
 
 class AvailabilityViewSchema(BaseModel):
@@ -25,18 +25,18 @@ class AvailabilityViewSchema(BaseModel):
 
 
 class AvailabilityListSchema(BaseModel):
-    availabilities: list[AvailabilityViewSchema]
+    availabilities: List[AvailabilityViewSchema]
 
 
 class AvailabilitySearchById(BaseModel):
-    id: int | None
+    id: Optional[int] = None
 
 
 class AvailabilitySearchByMentorId(BaseModel):
-    mentor_id: int | None
+    mentor_id: Optional[int] = None
 
 
-def show_availabilities(availabilities: list[AvailabilityViewSchema]):
+def show_availabilities(availabilities: List[AvailabilityViewSchema]):
     week_days = ("segunda-feira", "terça-feira", "quarta-feira",
                  "quinta-feira", "sexta-feira", "sábado", "domingo")
     result = []

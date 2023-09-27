@@ -1,5 +1,6 @@
 from datetime import datetime
 from pydantic import BaseModel
+from typing import List, Optional
 
 
 class MentorSchema(BaseModel):
@@ -22,15 +23,15 @@ class MentorSearchById(BaseModel):
 
 
 class MentorListSchema(BaseModel):
-    mentors: list[MentorViewSchema]
+    mentors: List[MentorViewSchema]
 
 
 class MentorEditSchema(BaseModel):
     id: int
-    first_name: str | None
-    last_name: str | None
-    email: str | None
-    updated_at: datetime | None = None
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    email: Optional[str] = None
+    updated_at: Optional[datetime] = None
 
 
 class MentorGetAvailableSlotsSchema(BaseModel):
@@ -40,7 +41,7 @@ class MentorGetAvailableSlotsSchema(BaseModel):
     slot_duration: int = 30
 
 
-def show_mentors(mentors: list[MentorViewSchema]):
+def show_mentors(mentors: List[MentorViewSchema]):
     result = []
     for mentor in mentors:
         result.append({
@@ -54,7 +55,7 @@ def show_mentors(mentors: list[MentorViewSchema]):
     return {"mentors": result}
 
 
-def show_mentor_slots(slots: list[tuple[datetime.time]]):
+def show_mentor_slots(slots: List[tuple[datetime.time]]):
     result = []
     for slot in slots:
         result.append({

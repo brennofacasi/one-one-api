@@ -27,11 +27,7 @@ def get_mentors():
     try:
         repository = DBMentorRepository()
         result = GetMentors(repository).execute()
-
-        if not result:
-            return {"message": "No mentors found. Add a new one!"}, 404
-        else:
-            return show_mentors(result)
+        return show_mentors(result)
 
     except Exception as e:
         return {"message": str(e)}, 400
