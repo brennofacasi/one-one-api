@@ -14,11 +14,13 @@ Primeiro, clone o projeto:
 git clone https://github.com/brennofacasi/one-one-api
 ```
 
-Renomeie o arquivo ```env.example``` para ```.env```. Não é necessário editar a variável, a não ser que seja uma API diferente da [DummyJSON](https://dummyjson.com/) .
+Renomeie o arquivo ```env.example``` para ```.env```. Não é necessário editar a variável, a não ser que seja uma API diferente da [DummyJSON](https://dummyjson.com/).
 
 ```env
 USERS_API='https://dummyjson.com/users?limit=15&select=firstName,lastName,email,company'
 ```
+
+> A One:One utiliza a base de usuários do **DummyJSON** para representar os dados de mentorandos. A aplicação obtém resultados através de uma chamada GET e retorna os dados formatados para serem utilizados internamente.
 
 Para rodar o projeto, crie um ambiente virtual (com [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html)), ative-o e instale os pacotes necessários:
 
