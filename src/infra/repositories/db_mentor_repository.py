@@ -13,6 +13,22 @@ class DBMentorRepository(MentorRepository):
         session.add(mentor_model)
         session.commit()
 
+    def update(self, mentor):
+        session = self.session
+        updating = session.query(MentorModel).filter(
+            MentorModel.id == mentor.id)
+
+        if mentor.first_name:
+            updating.update({"first_name": mentor.first_name})
+
+        if mentor.last_name:
+            updating.update({"last_name": mentor.last_name})
+
+        if mentor.email:
+            updating.update({"email": mentor.email})
+
+        session.commit()
+
     def delete(self, mentor_id):
         session = self.session
         session.query(MentorModel).filter(
