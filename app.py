@@ -4,7 +4,7 @@ from flask_openapi3 import Info, OpenAPI, Tag
 from src.infra.blueprints import *
 
 # -----------------------
-title = "MentorApi"
+title = "One:One API"
 description = "Aplicação para agendamento de reuniões de mentorias."
 version = "1.0.0"
 # -----------------------
