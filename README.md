@@ -39,14 +39,14 @@ Certifique-se de ter o [Docker](https://docs.docker.com/engine/install/) instala
 Navegue até o diretório que contém o ```Dockerfile``` e o ```requirements.txt``` no terminal.
 Execute **como administrador** o seguinte comando para construir a imagem Docker:
 
-```
+```bash
 $ docker build -t one-one-api .
 ```
 
 Uma vez criada a imagem, para executar o container basta executar, **como administrador**, seguinte o comando:
 
-```
-$ docker run -p 5000:3050 one-one-api
+```bash
+$ docker run -p 3050:5000 one-one-api
 ```
 
 Abra o endereço [http://localhost:3050](http://localhost:3050) para acessar a documentação da API em Swagger.
